@@ -1,0 +1,14 @@
+﻿{
+  "name": "nexustools",
+  "private": true,
+  "version": "1.0.0",
+  "description": "NexusTools plugin manager for Maya and ZBrush",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "test": "cargo test --manifest-path src-tauri/Cargo.toml"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.12.4"
+  }
+}

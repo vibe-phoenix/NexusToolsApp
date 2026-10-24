@@ -1,0 +1,8 @@
+/node_modules/
+/.analysis/
+/.testdata/
+/.toolchain/
+/src-tauri/target/
+/src-tauri/gen/
+/src-tauri/gen/schemas/
+*.log

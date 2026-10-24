@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NexusTools — Plugin manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <span class="brand">NexusTools</span>
+    <label class="search"><span aria-hidden="true">⌕</span><span class="sr">Search plugins</span><input id="search" type="search" placeholder="Search plugins…" autocomplete="off"></label>
+    <button class="quiet settingsbtn" id="settings" aria-label="Open Settings"><span>Settings</span></button>
+  </header>
+  <div class="shell">
+    <aside aria-label="Main navigation">
+      <button data-nav="Plugins">Plugins</button>
+      <div class="sidefoot">YOUR CREATIVE TOOLKIT<br><span style="color:#5f7187">NexusTools · v1.0</span></div>
+    </aside>
+    <main id="main"></main>
+  </div>
+
+  <dialog id="settingsDialog" aria-labelledby="settingsTitle" class="wide-dialog">
+    <h2 id="settingsTitle">Settings</h2>
+    <p>NexusTools installation and catalog preferences.</p>
+
+    <div class="settingsrow">
+      <strong>Plugin catalog</strong>
+      <p id="catalogInfo">Checking…</p>
+      <div class="inline-actions">
+        <button id="refreshCatalog">Refresh catalog</button>
+        <button id="refreshApps" class="quiet">Refresh applications</button>
+        <button id="clearCache" class="quiet">Clear metadata cache</button>
+      </div>
+    </div>
+
+    <div class="settingsrow">
+      <strong>Detected applications</strong>
+      <p id="detectedInfo">Checking installed Maya and ZBrush versions…</p>
+      <div id="detectedApps" class="app-list"></div>
+    </div>
+
+    <div class="settingsrow">
+      <strong>Add or correct an application path</strong>
+      <p>Use this when an application is installed on a custom drive, a user folder is redirected, or NexusTools could not detect a path.</p>
+      <form id="appForm" class="app-form" autocomplete="off">
+        <div class="form-grid">
+          <label>Application
+            <select id="appKind">
+              <option value="maya">Maya</option>
+              <option value="zbrush">ZBrush</option>
+            </select>
+          </label>
+          <label>Version
+            <input id="appVersion" placeholder="2025" required>
+          </label>
+          <label class="span-2">Installation folder
+            <span class="field-with-button"><input id="appRoot" placeholder="C:\Program Files\Autodesk\Maya2025" required><button type="button" class="quiet browse" data-browse="appRoot">Browse</button></span>
+          </label>
+          <label data-path="maya">User scripts folder
+            <span class="field-with-button"><input id="pathScripts" placeholder="Optional override"><button type="button" class="quiet browse" data-browse="pathScripts">Browse</button></span>
+          </label>
+          <label data-path="maya">User modules folder
+            <span class="field-with-button"><input id="pathModules" placeholder="Optional override"><button type="button" class="quiet browse" data-browse="pathModules">Browse</button></span>
+          </label>
+          <label data-path="maya">User preferences folder
+            <span class="field-with-button"><input id="pathPrefs" placeholder="Optional override"><button type="button" class="quiet browse" data-browse="pathPrefs">Browse</button></span>
+          </label>
+          <label data-path="zbrush">ZBrush plugins folder
+            <span class="field-with-button"><input id="pathZplugs" placeholder="Optional override"><button type="button" class="quiet browse" data-browse="pathZplugs">Browse</button></span>
+          </label>
+        </div>
+        <div class="inline-actions">
+          <button type="submit" class="primary">Save application path</button>
+          <span id="appFormStatus" class="form-status" role="status"></span>
+        </div>
+      </form>
+    </div>
+
+    <div class="settingsrow">
+      <strong>Installed plugins</strong>
+      <p>Removal uses local installation records and works even when the catalog is offline.</p>
+      <div id="installedSection" class="app-list"></div>
+    </div>
+    <div class="settingsrow">
+      <strong>Storage</strong>
+      <p id="storageInfo"></p>
+      <div class="inline-actions"><button id="openDataFolder" class="quiet">Open data folder</button></div>
+    </div>
+    <p class="credit">Made by Vibe Phoenix</p>
+    <div class="actions"><button class="primary" id="closeSettings">Done</button></div>
+  </dialog>
+
+  <dialog id="confirmDialog" aria-labelledby="confirmTitle">
+    <h2 id="confirmTitle">Replace installed version?</h2>
+    <p id="confirmText"></p>
+    <div class="actions"><button id="cancelConfirm">Cancel</button><button class="primary" id="acceptConfirm">Replace version</button></div>
+  </dialog>
+
+  <dialog id="updateTip" aria-labelledby="tipTitle">
+    <h2 id="tipTitle">Click to select</h2>
+    <p>Click anywhere on a plugin’s image or text to select or deselect it. Use Update selected to update your selection, or Update all to update every installed plugin with an available update, including plugins hidden by filters.</p>
+    <label class="tipcheck"><input type="checkbox" id="dontShowTip"> Don’t show again</label>
+    <div class="actions"><button class="primary" id="closeTip">Got it</button></div>
+  </dialog>
+
+  <dialog id="targetDialog" aria-labelledby="targetTitle">
+    <h2 id="targetTitle">Choose installations</h2>
+    <p id="targetText">Select the application installations where this plugin should be installed.</p>
+    <div id="targetChoices" class="target-choices"></div>
+    <div class="actions"><button id="cancelTargets">Cancel</button><button class="primary" id="confirmTargets">Install</button></div>
+  </dialog>
+
+  <dialog id="problemsDialog" aria-labelledby="problemsTitle" class="wide-dialog">
+    <h2 id="problemsTitle">Catalog and plugin problems</h2>
+    <div id="problemsBody" class="problems-body"></div>
+    <div class="actions"><button class="primary" id="closeProblems">Close</button></div>
+  </dialog>
+
+  <div class="toast" role="status" id="toast" hidden></div>
+  <div id="announcer" class="sr" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
