@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "plugins": [
+    {
+      "id": "modtools",
+      "repository": "vibe-phoenix/ModTools",
+      "ref": "main",
+      "manifestPath": "for installer/plugin.json"
+    }
+  ]
+}
