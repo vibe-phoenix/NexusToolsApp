@@ -6,6 +6,12 @@
       "repository": "vibe-phoenix/ModTools",
       "ref": "main",
       "manifestPath": "for installer/plugin.json"
+    },
+    {
+      "id": "sculptpie",
+      "repository": "vibe-phoenix/SculptPie",
+      "ref": "main",
+      "manifestPath": "for installer/plugin.json"
     }
   ]
 }
