@@ -12,6 +12,12 @@
       "repository": "vibe-phoenix/SculptPie",
       "ref": "main",
       "manifestPath": "for installer/plugin.json"
+    },
+    {
+      "id": "sculptshelf",
+      "repository": "vibe-phoenix/SculptShelf",
+      "ref": "main",
+      "manifestPath": "for installer/plugin.json"
     }
   ]
 }
